@@ -11,5 +11,27 @@
 |
 */
 
-// プレビューをした瞬間の設定
-Route::get('/', 'ToppagesController@index');
+// 一般ユーザー
+Route::group(['middleware' => ['guest']], function () {
+    
+    // プレビューした瞬間の設定
+    Route::get('/', 'ToppagesController@index');
+    // ログイン認証系
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login')->name('login.post');
+
+});
+
+// ユーザー認証必要
+Route::group(['middleware' => ['auth']], function () {
+    
+    // ログイン後のリダイレクト先
+    Route::get('top', function () {
+         return view('top');
+    });
+    
+    // ログアウト
+    Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+
+});
+
