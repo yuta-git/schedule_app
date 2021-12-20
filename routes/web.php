@@ -35,6 +35,9 @@ Route::group(['middleware' => ['auth']], function () {
     
     // ログアウト
     Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+    
+    // 顧客関係
+    Route::resource('customers', 'CustomersController');
 
 });
 

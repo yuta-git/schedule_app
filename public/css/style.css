@@ -411,6 +411,7 @@ select::-ms-expand {
   width: 5rem;
   height: 80px;
   height: 5rem;
+  overflow: hidden; // 追加
 }
 
 .customer-index__name {
@@ -419,6 +420,7 @@ select::-ms-expand {
   font-size: 20px;
   font-size: 1.25rem;
   font-weight: bold;
+  margin-left: 30px; // 追記
 }
 
 .customer-index__favorite {
