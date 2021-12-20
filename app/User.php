@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Customer; // 追記
 
 class User extends Authenticatable
 {
@@ -36,4 +37,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    // Customerモデルと1対多のリレーションを張る
+    public function customers()
+    {
+        // Customerモデルのデータを引っ張てくる
+        return $this->hasMany(Customer::class);
+    }
 }
