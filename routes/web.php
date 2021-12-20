@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// プレビューをした瞬間の設定
+Route::get('/', 'ToppagesController@index');
