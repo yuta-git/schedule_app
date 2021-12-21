@@ -7,12 +7,13 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
         <link rel="icon" href="{{ asset('images/favicon.ico')}} ">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css' rel='stylesheet' />
     </head>
 
     <body>
         <header class="mb-4">
             <nav class="navbar navbar-expand-sm navbar-dark bg-info">
-                <a class="navbar-brand" href="/">Contact You</a>
+                <a class="navbar-brand" href="/">Schedule App</a>
                 
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
                     <span class="navbar-toggler-icon"></span>
@@ -42,6 +43,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
         <script src="{{ asset('js/script.js') }}"></script>
     </body>
 </html>

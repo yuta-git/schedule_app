@@ -172,23 +172,6 @@
                 </div>
                 <div class="l-section__bottom"></div>
                 <div class="l-section__footer-padding-bottom"></div>
-                <footer class="footer">
-                    <div class="footer__inner">
-                        <nav class="footer__nav">
-                            <a href="./index.html" class="footer__nav-item">
-                                <figure class="footer__nav-icon">
-                                    <i class="fas fa-user"></i>
-                                </figure>
-                                <span class="footer__nav-name footer-active">顧客 </span>
-                            </a>
-                            <a href="./calender.html" class="footer__nav-item">
-                                <figure class="footer__nav-icon">
-                                    <i class="fas fa-calendar-alt"></i>
-                                </figure>
-                                <span class="footer__nav-name">カレンダー </span>
-                            </a>
-                        </nav>
-                    </div>
-                </footer>
+
             </form>
 @endsection
