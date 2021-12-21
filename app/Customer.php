@@ -25,4 +25,16 @@ class Customer extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function is_delete() {
+        $customer = Customer::where('id', $this->id)->where('delete_flag', 1)->get()->first();
+        
+        if($customer !== null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+        
 }

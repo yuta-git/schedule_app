@@ -63,6 +63,17 @@
                                     <i class="fas fa-star js-my-star"></i>
                                 </div>
                             </div>
+                            <!-- 削除ボタン -->
+                            <form action="/customers/{{ $customer->id }}/delete" method="PUT">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="customer_id" value="{{$customer->id}}">
+                                  
+                                <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除</button>
+                                
+                            </form>
+                            <!-- /削除ボタン -->
+                            
                             <!-- /.customer-index__right -->
                         </div>
                         <!-- /.customer-index__item -->
@@ -103,22 +114,5 @@
             <!-- /.main-nav -->
             <!-- フッターの余白 -->
             <div class="l-section__header-padding-top"></div>
-            <footer class="footer">
-                <div class="footer__inner">
-                    <nav class="footer__nav">
-                        <a href="./index.html" class="footer__nav-item">
-                            <figure class="footer__nav-icon">
-                                <i class="fas fa-user"></i>
-                            </figure>
-                            <span class="footer__nav-name footer-active">顧客 </span>
-                        </a>
-                        <a href="./calender.html" class="footer__nav-item">
-                            <figure class="footer__nav-icon">
-                                <i class="fas fa-calendar-alt"></i>
-                            </figure>
-                            <span class="footer__nav-name">カレンダー </span>
-                        </a>
-                    </nav>
-                </div>
-            </footer>
+
 @endsection

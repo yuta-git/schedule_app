@@ -216,13 +216,8 @@
                     </div>
                 </div>
                 <!-- /.history-plan -->
-                <!-- 削除ボタン -->
-                <div class="c-title-lavel color-white">
-                    <div class="c-title-lavel__inner text-center">
-                        <a class="before-icon-btn before-icon-btn--times before-icon-btn--times" href="#">顧客情報を削除する</a>
-                    </div>
-                </div>
-                <div class="l-section__footer-padding-bottom"></div>
-
             </form>
+            
+
+            <div class="l-section__footer-padding-bottom"></div>
 @endsection

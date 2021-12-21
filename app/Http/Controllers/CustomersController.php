@@ -213,4 +213,19 @@ class CustomersController extends Controller
     {
         //
     }
+    
+    public function delete($customer_id){
+        
+        dd($customer_id);
+
+        $customer = Customer::find($customer_id);
+        // dd($customer);
+        $customer->favorite_flag = 0;
+        $customer->delete_flag = 1;
+        $customer->save();
+    
+        return redirect('/customers')->with('flash_message', $customer->name . 'さんを削除しました');
+    
+    }
+    
 }

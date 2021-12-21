@@ -38,6 +38,10 @@ Route::group(['middleware' => ['auth']], function () {
     
     // 顧客関係
     Route::resource('customers', 'CustomersController');
+    
+    // 顧客削除
+    Route::put('customers/{customer}/delete', 'CustomersController@delete')->name('customers.delete');
+    Route::put('customers/{customer}/undelete', 'CustomersController@undelete')->name('customers.undelete');
 
 });
 
