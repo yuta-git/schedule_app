@@ -215,6 +215,7 @@ class CustomersController extends Controller
         //
     }
     
+    //削除
     public function delete($customer_id){
         $customer = Customer::find($customer_id);
         // dd($customer);
@@ -226,6 +227,7 @@ class CustomersController extends Controller
     
     }
 
+    //削除解除
     public function undelete($customer_id){
         // dd($customer_id);
         
@@ -238,11 +240,43 @@ class CustomersController extends Controller
         return redirect('/customers')->with('flash_message', $customer->name . 'さんを削除から復活しました');
     }
     
+    //削除顧客一覧取得
     public function deletes(){
         // dd('OK');
         $del_customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 1)->get();
         // dd($del_customers);
         return view('customers.del_customers', compact('del_customers'));
+    }
+    
+    //お気に入り
+    public function favorite($customer_id){
+        // dd($customer_id);
+
+        $customer = Customer::find($customer_id);
+        // dd($customer);
+        $customer->favorite_flag = 1;
+        $customer->save();
+
+        return redirect('/customers')->with('flash_message', $customer->name . 'さんをお気に入りに登録しました');
+    }
+
+    //お気に入り解除
+    public function unfavorite($customer_id){
+        // dd($customer_id);
+
+        $customer = Customer::find($customer_id);
+        // dd($customer);
+        $customer->favorite_flag = 0;
+        $customer->save();
+
+        return redirect('/customers')->with('flash_message', $customer->name . 'さんをお気に入りにから削除しました');
+    }
+    
+    //お気に入り顧客一覧取得
+    public function favorites(){
+        $fav_customers = Customer::where('user_id', \Auth::id())->where('favorite_flag', 1)->get();
+        // dd($fav_customers);
+        return view('customers.favorites', compact('fav_customers'));
     }
     
 }

@@ -27,8 +27,8 @@
             <!-- /.search-form -->
             <div class="sort-form">
                 <ul class="sort-form__left">
-                    <li class="sort-form__all">全て</li>
-                    <li class="sort-form__favorite">お気に入り</li>
+                    <!--<li class="sort-form__all">全て</li>-->
+                    <!--<li class="sort-form__favorite">お気に入り</li>-->
                 </ul>
                 <ul class="sort-form__right">
                     <li class="sort-form__select">
@@ -57,34 +57,48 @@
                                 </figure>
                                 <p class="customer-index__name">{{ $customer->name }}</p>
                             </a>
-                            <!-- /.customer-index__right -->
-                            <div class="customer-index__right">
-                                <div class="customer-index__favorite">
-                                    <i class="fas fa-star js-my-star"></i>
-                                </div>
-                            </div>
-                            <!-- 削除ボタン -->
-                            <!-- methodはPUTではなく、POSTにしないとエラーになる -->
-                            @if(!$customer->is_delete())
-                            <form action="/customers/{{ $customer->id }}/delete" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="PUT">
-                                <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除</button>
-                            </form>
-                            <!-- /削除ボタン -->
-                            @else
-                            <!-- 削除解除ボタン -->
-                            <form action="/customers/{{ $customer->id }}/undelete" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="PUT">
-                                <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除解除</button>
-                            </form>
-                            <!-- /削除解除ボタン -->
-                            @endif
                             
-                            <!-- /.customer-index__right -->
-                        </div>
-                        <!-- /.customer-index__item -->
+                            <div class="customer-index__right">
+                            <!-- お気に入りボタン -->
+                                @if(!$customer->is_favorite())
+                                <form action="/customers/{{ $customer->id }}/favorite" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">                                    
+                                    <button type="submit" class="customer-index__favorite">
+                                        <i class="far fa-star js-my-star"></i>
+                                    </button>
+                                </form>
+                                
+                                <!-- お気に入りじゃないボタン -->
+                                @else
+                                <form action="/customers/{{ $customer->id }}/unfavorite" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">                                    
+                                    <button type="submit" class="customer-index__favorite">
+                                        <i class="fas fa-star js-my-star"></i>
+                                    </button>
+                                </form>
+                                @endif
+                                <!-- 削除ボタン -->
+                                <!-- methodはPUTではなく、POSTにしないとエラーになる -->
+                                @if(!$customer->is_delete())
+                                <form action="/customers/{{ $customer->id }}/delete" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除</button>
+                                </form>
+                                <!-- /削除ボタン -->
+                                @else
+                                <!-- 削除解除ボタン -->
+                                <form action="/customers/{{ $customer->id }}/undelete" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除解除</button>
+                                </form>
+                                <!-- /削除解除ボタン -->
+                                @endif
+                            </div><!-- /.customer-index__right -->
+                        </div><!-- /.customer-index__item -->
                         @endforeach
                     </div>
                     <!-- /.customer-index__items -->

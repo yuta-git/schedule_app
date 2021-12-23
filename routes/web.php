@@ -41,9 +41,17 @@ Route::group(['middleware' => ['auth']], function () {
     
     // 顧客削除
     Route::put('customers/{customer}/delete', 'CustomersController@delete')->name('customers.delete');
+    //顧客削除解除
     Route::put('customers/{customer}/undelete', 'CustomersController@undelete')->name('customers.undelete');
     //削除顧客一覧
     Route::get('del_customers', 'CustomersController@deletes')->name('customers.deletes');
+    
+    //お気に入り
+    Route::put('customers/{customer}/favorite', 'CustomersController@favorite')->name('customers.favorite');
+    //お気に入り解除
+    Route::put('customers/{customer}/unfavorite', 'CustomersController@unfavorite')->name('customers.unfavorite');
+    //お気に入り顧客一覧取得
+    Route::get('favorites', 'CustomersController@favorites')->name('customers.favorites');
 
 });
 

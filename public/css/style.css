@@ -278,20 +278,20 @@ select::-ms-expand {
   color: pink;
 }
 
-.before-icon-btn::before {
-  display: inline-block;
-  margin-right: .5em;
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-}
+/*.before-icon-btn::before {*/
+/*  display: inline-block;*/
+/*  margin-right: .5em;*/
+/*  font-family: 'Font Awesome 5 Free';*/
+/*  font-weight: 900;*/
+/*}*/
 
-.before-icon-btn--download::before {
-  content: '\f073';
-}
+/*.before-icon-btn--download::before {*/
+/*  content: '\f073';*/
+/*}*/
 
-.before-icon-btn--times::before {
-  content: '\f00d';
-}
+/*.before-icon-btn--times::before {*/
+/*  content: '\f00d';*/
+/*}*/
 
 .c-btn {
   display: inline-block;
@@ -404,6 +404,11 @@ select::-ms-expand {
   display: -ms-flexbox;
   display: flex;
   width: 80%;
+}
+
+.customer-index__right {
+  display: flex;
+  align-items: center;
 }
 
 .customer-index__img {

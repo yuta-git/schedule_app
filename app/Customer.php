@@ -36,5 +36,15 @@ class Customer extends Model
         }
     }
     
+    public function is_favorite(){
+        $customer = Customer::where('id', $this->id)->where('favorite_flag', 1)->get()->first();
+        // dd($customer);
+        if($customer !== null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
         
 }

@@ -7,7 +7,7 @@
                     <div class="header__cog js-main-nav">
                         <i class="fas fa-cog"></i>
                     </div>
-                    <div class="header__title">顧客一覧({{ count($del_customers) }}人) </div>
+                    <div class="header__title">顧客一覧({{ count($fav_customers) }}人) </div>
                     <a href="/customers/create" class="header__create">
                         <i class="far fa-plus-square"></i>
                     </a>
@@ -23,7 +23,7 @@
                     <input id="sbtn" type="submit" value="検索" />
                 </form>
             </div>
-            @if(count($del_customers) !== 0)
+            @if(count($fav_customers) !== 0)
             <!-- /.search-form -->
             <div class="sort-form">
                 <ul class="sort-form__left">
@@ -45,7 +45,7 @@
             <div class="customer-index">
                 <div class="customer-index__inner">
                     <div class="customer-index__items">
-                        @foreach($del_customers as $customer)
+                        @foreach($fav_customers as $customer)
                         <div class="customer-index__item">
                             <a href="/customers/{{ $customer->id }}" class="customer-index__left">
                                 <figure class="customer-index__img">
@@ -57,34 +57,48 @@
                                 </figure>
                                 <p class="customer-index__name">{{ $customer->name }}</p>
                             </a>
-                            <!-- /.customer-index__right -->
-                            <div class="customer-index__right">
-                                <!--<div class="customer-index__favorite">-->
-                                <!--    <i class="fas fa-star js-my-star"></i>-->
-                                <!--</div>-->
-                            </div>
-                            <!-- 削除ボタン -->
-                            <!-- methodはPUTではなく、POSTにしないとエラーになる -->
-                            @if(!$customer->is_delete())
-                            <form action="/customers/{{ $customer->id }}/delete" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="PUT">
-                                <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除</button>
-                            </form>
-                            <!-- /削除ボタン -->
-                            @else
-                            <!-- 削除解除ボタン -->
-                            <form action="/customers/{{ $customer->id }}/undelete" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="PUT">
-                                <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除解除</button>
-                            </form>
-                            <!-- /削除解除ボタン -->
-                            @endif
                             
-                            <!-- /.customer-index__right -->
-                        </div>
-                        <!-- /.customer-index__item -->
+                            <div class="customer-index__right">
+                            <!-- お気に入りボタン -->
+                                @if(!$customer->is_favorite())
+                                <form action="/customers/{{ $customer->id }}/favorite" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">                                    
+                                    <button type="submit" class="customer-index__favorite">
+                                        <i class="far fa-star js-my-star"></i>
+                                    </button>
+                                </form>
+                                
+                                <!-- お気に入りじゃないボタン -->
+                                @else
+                                <form action="/customers/{{ $customer->id }}/unfavorite" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">                                    
+                                    <button type="submit" class="customer-index__favorite">
+                                        <i class="fas fa-star js-my-star"></i>
+                                    </button>
+                                </form>
+                                @endif
+                                <!-- 削除ボタン -->
+                                <!-- methodはPUTではなく、POSTにしないとエラーになる -->
+                                @if(!$customer->is_delete())
+                                <form action="/customers/{{ $customer->id }}/delete" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除</button>
+                                </form>
+                                <!-- /削除ボタン -->
+                                @else
+                                <!-- 削除解除ボタン -->
+                                <form action="/customers/{{ $customer->id }}/undelete" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button type="submit" class="before-icon-btn before-icon-btn--times before-icon-btn--times">削除解除</button>
+                                </form>
+                                <!-- /削除解除ボタン -->
+                                @endif
+                            </div><!-- /.customer-index__right -->
+                        </div><!-- /.customer-index__item -->
                         @endforeach
                     </div>
                     <!-- /.customer-index__items -->
@@ -120,9 +134,8 @@
             </div>
             @else
             <div class="row mt-5">
-              <h3 class="offset-sm-3 col-sm-6 text-center">削除された顧客はまだいません</h3>
+                <h3 class="offset-sm-3 col-sm-6 text-center">お気に入り顧客はまだいません</h3>
             </div>
-
             @endif
             <!-- /.main-nav -->
             <!-- フッターの余白 -->
