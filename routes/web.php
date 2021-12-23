@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('customers/{customer}/unfavorite', 'CustomersController@unfavorite')->name('customers.unfavorite');
     //お気に入り顧客一覧取得
     Route::get('favorites', 'CustomersController@favorites')->name('customers.favorites');
+    
+    // 記録関係
+    Route::resource('records', 'RecordsController');
 
 });
 

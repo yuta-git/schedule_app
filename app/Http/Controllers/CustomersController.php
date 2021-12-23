@@ -116,8 +116,12 @@ class CustomersController extends Controller
     {
         // ログインしているユーザーの顧客一覧取得
         $customers = \Auth::user()->customers()->get();
+        
+        // 顧客の全記録を取得
+        $records = $customer->records()->get();
+        
         // view の呼び出し
-        return view('customers.show', compact('customers', 'customer'));
+        return view('customers.show', compact('customers', 'records' , 'customer'));
     }
 
     /**

@@ -653,6 +653,9 @@ select::-ms-expand {
   padding-left: 30px;
   padding-left: 1.875rem;
 }
+.header__create--white {
+  color: white;
+}
 
 .header__title {
   font-weight: bold;
@@ -1129,15 +1132,15 @@ body.noscroll {
 }
 
 .history-plan__item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  /*display: -webkit-box;*/
+  /*display: -ms-flexbox;*/
+  /*display: flex;*/
+  /*-webkit-box-pack: justify;*/
+  /*    -ms-flex-pack: justify;*/
+  /*        justify-content: space-between;*/
+  /*-webkit-box-align: center;*/
+  /*    -ms-flex-align: center;*/
+  /*        align-items: center;*/
   border-bottom: 1px solid #eee;
   padding: 10px;
   padding: 0.625rem;

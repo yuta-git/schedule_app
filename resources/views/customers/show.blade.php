@@ -19,7 +19,7 @@
                 <div class="c-title-lavel">
                     <div class="c-title-lavel__inner flex-box">
                         <span class="c-title-lavel__title">基本プロフィール</span>
-                        <a class="before-icon-btn before-icon-btn--download" href="./history-plan-create.html">履歴•予定登録</a>
+                        {!! link_to_route('records.create', '記録新規作成' , ['customer_id' => $customer->id ],['class' => 'before-icon-btn before-icon-btn--download']) !!}
                     </div>
                 </div>
                 <div class="basic-profile">
@@ -172,6 +172,8 @@
                     <label for="your_company_name" class="form__label">会社名</label>
                     <input name="company_name" value="{{ $customer->company_name }}" id="your_company_name" type="text" class="form__input" placeholder="タップして入力">
                 </div>
+            </form>
+                
                 <!-- 履歴・予定情報 -->
                 <div class="c-title-lavel">
                     <div class="c-title-lavel__inner">
@@ -181,42 +183,25 @@
                 <div class="history-plan">
                     <div class="history-plan__inner">
                         <div class="history-plan__items">
-                            <a href="./show.html" class="history-plan__item">
+                            @foreach($records as $record)
+                            <a href="/records/{{ $record->id }}/edit" class="history-plan__item">
                                 <div class="history-plan__left">
                                     <p class="history-plan__title">日時：</p>
-                                    <p class="history-plan__date">10月29日 
-                                        <span>16時</span>
+                                    <p class="history-plan__date">{{$record->start}} 
+                                        <span>{{ substr($record->start_time, 0, 5) }}</span>
                                     </p>
                                 </div>
-                                <!-- /.history-plan__right -->
+                                
                                 <div class="history-plan__right">
-                                    <p class="history-plan__title">場所：</p>
-                                    <div class="history-plan__place">喫茶店 </div>
+                                    <p class="history-plan__title">メモ：</p>
+                                    <div class="history-plan__place">{{$record->title}} </div>
                                 </div>
                                 <!-- /.history-plan__right -->
-                            </a>
-                            <!-- /.history-plan__item -->
-                            <a href="./show.html" class="history-plan__item">
-                                <div class="history-plan__left">
-                                    <p class="history-plan__title">日時：</p>
-                                    <p class="history-plan__date">11月29日 
-                                        <span>16時</span>
-                                    </p>
-                                </div>
-                                <!-- /.history-plan__right -->
-                                <div class="history-plan__right">
-                                    <p class="history-plan__title">場所：</p>
-                                    <div class="history-plan__place">会社 </div>
-                                </div>
-                                <!-- /.history-plan__right -->
-                            </a>
-                            <!-- /.history-plan__item -->
-                        </div>
-                        <!-- /.history-plan__items -->
-                    </div>
-                </div>
-                <!-- /.history-plan -->
-            </form>
+                            </a><!-- /.history-plan__item -->
+                            @endforeach
+                        </div><!-- /.history-plan__items -->
+                    </div><!-- /.history-plan__inner -->
+                </div><!-- /.history-plan -->
             
 
             <div class="l-section__footer-padding-bottom"></div>
