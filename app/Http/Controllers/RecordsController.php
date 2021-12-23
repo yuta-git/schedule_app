@@ -52,6 +52,9 @@ class RecordsController extends Controller
           'title' => 'required',
           'start' => 'required',
           'start_time' => 'required',
+          'end' => 'required',
+          'end_time' => 'required',
+          'color' => 'required',
       ]);
 
       // 入力情報の取得
@@ -113,6 +116,9 @@ class RecordsController extends Controller
             'title' => 'required',
             'start' => 'required',
             'start_time' => 'required',
+            'end' => 'required',
+            'end_time' => 'required',
+            'color' => 'required',
         ]);
 
         // 入力情報の取得
