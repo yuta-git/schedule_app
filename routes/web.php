@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     // 顧客削除
     Route::put('customers/{customer}/delete', 'CustomersController@delete')->name('customers.delete');
     Route::put('customers/{customer}/undelete', 'CustomersController@undelete')->name('customers.undelete');
+    //削除顧客一覧
+    Route::get('del_customers', 'CustomersController@deletes')->name('customers.deletes');
 
 });
 

@@ -7,7 +7,7 @@
                     <div class="header__cog js-main-nav">
                         <i class="fas fa-cog"></i>
                     </div>
-                    <div class="header__title">顧客一覧({{ count($customers) }}人) </div>
+                    <div class="header__title">顧客一覧({{ count($del_customers) }}人) </div>
                     <a href="/customers/create" class="header__create">
                         <i class="far fa-plus-square"></i>
                     </a>
@@ -23,7 +23,7 @@
                     <input id="sbtn" type="submit" value="検索" />
                 </form>
             </div>
-            @if(count($customers) !== 0)
+            @if(count($del_customers) !== 0)
             <!-- /.search-form -->
             <div class="sort-form">
                 <ul class="sort-form__left">
@@ -45,7 +45,7 @@
             <div class="customer-index">
                 <div class="customer-index__inner">
                     <div class="customer-index__items">
-                        @foreach($customers as $customer)
+                        @foreach($del_customers as $customer)
                         <div class="customer-index__item">
                             <a href="/customers/{{ $customer->id }}" class="customer-index__left">
                                 <figure class="customer-index__img">
@@ -118,6 +118,11 @@
                     </ul>
                 </div>
             </div>
+            @else
+            <div class="row mt-5">
+              <h3 class="offset-sm-3 col-sm-6 text-center">削除された顧客はまだいません</h3>
+            </div>
+
             @endif
             <!-- /.main-nav -->
             <!-- フッターの余白 -->

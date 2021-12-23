@@ -26,6 +26,7 @@
                         <li class="navbar-text text-success bg-white p-2 mr-5">{{ Auth::user()->name }}</li>
                         <li><a href="/customers/create" class="nav-link">新規顧客登録</a></li>
                         <li><a href="/customers" class="nav-link">顧客一覧</a></li>
+                        <li><a href="/del_customers" class="nav-link">削除顧客</a></li>
                         <li><a href="/logout" class="nav-link">ログアウト</a></li>
                         @endif
                     </ul>

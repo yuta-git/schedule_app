@@ -15,7 +15,8 @@ class CustomersController extends Controller
     public function index()
     {
         // ログインしているユーザーの顧客一覧取得
-        $customers = \Auth::user()->customers()->get();
+        // $customers = \Auth::user()->customers()->get();
+        $customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 0)->get();
         // view の呼び出し
         return view('customers.index', compact('customers'));
     }
@@ -215,9 +216,6 @@ class CustomersController extends Controller
     }
     
     public function delete($customer_id){
-        
-        dd($customer_id);
-
         $customer = Customer::find($customer_id);
         // dd($customer);
         $customer->favorite_flag = 0;
@@ -226,6 +224,25 @@ class CustomersController extends Controller
     
         return redirect('/customers')->with('flash_message', $customer->name . 'さんを削除しました');
     
+    }
+
+    public function undelete($customer_id){
+        // dd($customer_id);
+        
+        $customer = Customer::find($customer_id);
+        // dd($customer);
+        $customer->favorite_flag = 0;
+        $customer->delete_flag = 0;
+        $customer->save();
+        
+        return redirect('/customers')->with('flash_message', $customer->name . 'さんを削除から復活しました');
+    }
+    
+    public function deletes(){
+        // dd('OK');
+        $del_customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 1)->get();
+        // dd($del_customers);
+        return view('customers.del_customers', compact('del_customers'));
     }
     
 }
