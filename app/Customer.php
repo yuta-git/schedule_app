@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User; // 追加
+use App\Record; // 追加
 
 class Customer extends Model
 {
@@ -44,6 +45,14 @@ class Customer extends Model
         }else{
             return false;
         }
+    }
+    
+    /**
+     * この顧客が所有する記録一覧（Recordモデルとの1対多の関係を定義）
+     */
+    public function records()
+    {
+        return $this->hasMany(Record::class);
     }
     
         
