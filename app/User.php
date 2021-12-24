@@ -44,4 +44,13 @@ class User extends Authenticatable
         // Customerモデルのデータを引っ張てくる
         return $this->hasMany(Customer::class);
     }
+    
+    /**
+     * 関連するフラグインスタンスを取得
+     */
+    public function flag()
+    {
+        return $this->hasOne('App\Flag');
+    }    
+    
 }

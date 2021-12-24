@@ -55,6 +55,9 @@ Route::group(['middleware' => ['auth']], function () {
     
     // 記録関係
     Route::resource('records', 'RecordsController');
+    
+    // 顧客表示フラグ関係
+    Route::resource('flags', 'FlagsController');
 
 });
 

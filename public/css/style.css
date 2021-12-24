@@ -158,9 +158,9 @@ input,
 button,
 select,
 textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  /*-webkit-appearance: none;*/
+  /*-moz-appearance: none;*/
+  /*appearance: none;*/
   background: transparent;
   border: none;
   border-radius: 0;
@@ -174,7 +174,7 @@ textarea {
 
 input[type="checkbox"],
 input[type="radio"] {
-  display: none;
+  /*display: none;*/
 }
 
 input[type="submit"],

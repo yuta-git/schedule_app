@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
         <link rel="icon" href="{{ asset('images/favicon.ico')}} ">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/addition.css') }}">
         <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css' rel='stylesheet' />
     </head>
 
@@ -24,10 +25,11 @@
                     <ul class="navbar-nav">
                         @if(Auth::check())
                         <li class="navbar-text text-success bg-white p-2 mr-5">{{ Auth::user()->name }}</li>
-                        <li><a href="/customers/create" class="nav-link">新規顧客登録</a></li>
+                        <li><a href="/customers/create" class="nav-link">顧客登録</a></li>
                         <li><a href="/customers" class="nav-link">顧客一覧</a></li>
                         <li><a href="/favorites" class="nav-link">お気に入り</a></li>
                         <li><a href="/del_customers" class="nav-link">削除顧客</a></li>
+                        <li>{!! link_to_route('flags.create', '表示項目設定', [], ['class' => 'nav-link']) !!}</li>
                         <li><a href="/logout" class="nav-link">ログアウト</a></li>
                         @endif
                     </ul>

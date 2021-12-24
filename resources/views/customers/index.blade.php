@@ -5,11 +5,11 @@
             <header class="header">
                 <div class="header__inner">
                     <div class="header__cog js-main-nav">
-                        <i class="fas fa-cog"></i>
+                        <!--<i class="fas fa-cog"></i>-->
                     </div>
                     <div class="header__title">顧客一覧({{ count($customers) }}人) </div>
                     <a href="/customers/create" class="header__create">
-                        <i class="far fa-plus-square"></i>
+                        <!--<i class="far fa-plus-square"></i>-->
                     </a>
                 </div>
             </header>
@@ -59,7 +59,7 @@
                             </a>
                             
                             <div class="customer-index__right">
-                            <!-- お気に入りボタン -->
+                                <!-- お気に入りボタン -->
                                 @if(!$customer->is_favorite())
                                 <form action="/customers/{{ $customer->id }}/favorite" method="POST">
                                     {{ csrf_field() }}

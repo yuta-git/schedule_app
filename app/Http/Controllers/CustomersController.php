@@ -17,8 +17,11 @@ class CustomersController extends Controller
         // ログインしているユーザーの顧客一覧取得
         // $customers = \Auth::user()->customers()->get();
         $customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 0)->get();
+
+        $flag = \Auth::user()->flag()->get()->first();        
+        
         // view の呼び出し
-        return view('customers.index', compact('customers'));
+        return view('customers.index', compact('customers', 'flag'));
     }
 
     /**
@@ -120,8 +123,10 @@ class CustomersController extends Controller
         // 顧客の全記録を取得
         $records = $customer->records()->get();
         
+        $flag = \Auth::user()->flag()->get()->first();
+        
         // view の呼び出し
-        return view('customers.show', compact('customers', 'records' , 'customer'));
+        return view('customers.show', compact('customers', 'records' , 'customer', 'flag'));
     }
 
     /**
@@ -180,6 +185,7 @@ class CustomersController extends Controller
         $telephone = $request->input('telephone');
         $company_name = $request->input('company_name');
         $memo = $request->input('memo');
+        $thumbnail_flag = $request->input('thumbnail_flag');
         
         // https://qiita.com/ryo-program/items/35bbe8fc3c5da1993366
         // 画像ファイルのアップロード
@@ -248,8 +254,12 @@ class CustomersController extends Controller
     public function deletes(){
         // dd('OK');
         $del_customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 1)->get();
+        
         // dd($del_customers);
-        return view('customers.del_customers', compact('del_customers'));
+        
+        $flag = \Auth::user()->flag()->get()->first();
+        
+        return view('customers.del_customers', compact('del_customers', 'flag'));
     }
     
     //お気に入り
@@ -279,8 +289,26 @@ class CustomersController extends Controller
     //お気に入り顧客一覧取得
     public function favorites(){
         $fav_customers = Customer::where('user_id', \Auth::id())->where('favorite_flag', 1)->get();
+        
         // dd($fav_customers);
-        return view('customers.favorites', compact('fav_customers'));
+        
+        $flag = \Auth::user()->flag()->get()->first();
+        
+        return view('customers.favorites', compact('fav_customers', 'flag'));
     }
     
+    // //検索機能
+    // public function search(Request $request){
+    //     $keyword = $request->input('keyword');
+    //     if($keyword !== ''){
+    //         $customers = \Auth::user()->customers()->where('name', 'like', "%$keyword%")->get();
+    //         $flag = \Auth::user()->flag()->get()->first();
+    //         // dd($customers);
+    //         // session(['flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました']);
+    //         $request->session()->flash('flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました');
+    //         return view('customers.index', compact('customers', 'flag'));
+    //     }else{
+    //         return redirect('customers/index');
+    // }
+
 }
