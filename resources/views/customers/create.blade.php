@@ -11,7 +11,7 @@
                         </div>
                         <div class="header__create">
                             <!--<a href="./index.html">保存</a>-->
-                            <button type="submit">保存</button>
+                            <button type="submit" class="color-white">保存</button>
                         </div>
                     </div>
                 </header>
@@ -45,13 +45,7 @@
                                 <!--女性: <input type="radio" name="gender" value="woman">-->
                                 <!--不明: <input type="radio" name="gender" value="unknown">-->
                             </div>
-                            <!-- お気に入り -->
-                            <div class="basic-profile__content">
-                                <p class="basic-profile__title">お気に入り</p>
-                                <p class="basic-profile__description">
-                                    <i class="far fa-star my-star js-my-star"></i>
-                                </p>
-                            </div>
+    
                         </div>
                         <!-- /.basic-profile__body -->
                     </div>

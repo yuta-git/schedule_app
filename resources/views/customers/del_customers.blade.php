@@ -15,14 +15,16 @@
             </header>
             <!-- ヘッダーの余白 -->
             <!-- <div class="l-section__header-padding-top">
-                  
             </div> -->
+            
+           <!-- 検索フォーム -->
             <div class="search-form">
-                <form id="form1" action="自分のサイトURL">
-                    <input id="sbox" name="s" type="text" placeholder="名前で入力してください" />
-                    <input id="sbtn" type="submit" value="検索" />
-                </form>
+            {!! Form::open(['route' => ['customers.searchDel'], 'method' => 'GET', 'class' => 'd-flex']) !!}
+                {!! Form::search('keyword', old('keyword'), ['class' => 'form-control me-2', 'placeholder' => '名前を入力してください']) !!}
+                {!! Form::button('<i class="fas fa-search"></i>', ['class' => 'btn btn-outline-success', 'type' => 'submit']) !!}
+            {!! Form::close() !!}
             </div>
+            
             @if(count($del_customers) !== 0)
             <!-- /.search-form -->
             <div class="sort-form">

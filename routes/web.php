@@ -58,6 +58,12 @@ Route::group(['middleware' => ['auth']], function () {
     
     // 顧客表示フラグ関係
     Route::resource('flags', 'FlagsController');
+    
+    // 顧客検索
+    Route::get('search_customers', 'CustomersController@search')->name('customers.search');
+    Route::get('searchFav_customers', 'CustomersController@searchFav')->name('customers.searchFav');
+    Route::get('searchDel_customers', 'CustomersController@searchDel')->name('customers.searchDel');
+
 
 });
 

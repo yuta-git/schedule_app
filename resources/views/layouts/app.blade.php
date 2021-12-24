@@ -29,7 +29,7 @@
                         <li><a href="/customers" class="nav-link">顧客一覧</a></li>
                         <li><a href="/favorites" class="nav-link">お気に入り</a></li>
                         <li><a href="/del_customers" class="nav-link">削除顧客</a></li>
-                        <li>{!! link_to_route('flags.create', '表示項目設定', [], ['class' => 'nav-link']) !!}</li>
+                        <li>{!! link_to_route('flags.create', '表示設定', [], ['class' => 'nav-link']) !!}</li>
                         <li><a href="/logout" class="nav-link">ログアウト</a></li>
                         @endif
                     </ul>

@@ -297,18 +297,48 @@ class CustomersController extends Controller
         return view('customers.favorites', compact('fav_customers', 'flag'));
     }
     
-    // //検索機能
-    // public function search(Request $request){
-    //     $keyword = $request->input('keyword');
-    //     if($keyword !== ''){
-    //         $customers = \Auth::user()->customers()->where('name', 'like', "%$keyword%")->get();
-    //         $flag = \Auth::user()->flag()->get()->first();
-    //         // dd($customers);
-    //         // session(['flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました']);
-    //         $request->session()->flash('flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました');
-    //         return view('customers.index', compact('customers', 'flag'));
-    //     }else{
-    //         return redirect('customers/index');
-    // }
+    // 顧客一覧検索
+     public function search(Request $request){
+        $keyword = $request->input('keyword');
+        if($keyword !== ''){
+            $customers = \Auth::user()->customers()->where('kana_name', 'like', "%$keyword%")->orWhere('name', 'like', "%$keyword%")->where('delete_flag', '0')->get();
+            // dd($customers);
+            // session(['flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました']);
+            $request->session()->flash('flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました');
+            return view('customers.index', compact('customers'));
+        }else{
+            return redirect('customers/index');
+        }
+    }
+    
+    // お気に入り顧客検索
+     public function searchFav(Request $request){
+        $keyword = $request->input('keyword');
+        if($keyword !== ''){
+            $customers = \Auth::user()->customers()->where('kana_name', 'like', "%$keyword%")->orWhere('name', 'like', "%$keyword%")->where('favorite_flag', '1')->where('delete_flag', '0')->get();
+            // dd($customers);
+            // session(['flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました']);
+            $request->session()->flash('flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました');
+            return view('customers.index', compact('customers'));
+        }else{
+            return redirect('customers/index');
+        }
+    }
+    
+    // 削除済みの顧客検索
+    public function searchDel(Request $request){
+        $keyword = $request->input('keyword');
+        if($keyword !== ''){
+            $customers = \Auth::user()->customers()->where('kana_name', 'like', "%$keyword%")->orWhere('name', 'like', "%$keyword%")->where('delete_flag', '1')->get();
+            // dd($customers);
+            // session(['flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました']);
+            $request->session()->flash('flash_message', '検索キーワード: ' . $keyword . 'で ' . $customers->count() . '件ヒットしました');
+            return view('customers.index', compact('customers'));
+        }else{
+            return redirect('customers/index');
+        }
+    }
+
+
 
 }
