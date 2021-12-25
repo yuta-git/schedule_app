@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CustomersController extends Controller
 {
@@ -87,17 +88,28 @@ class CustomersController extends Controller
         
         // https://qiita.com/ryo-program/items/35bbe8fc3c5da1993366
         // 画像ファイルのアップロード
-        if($file){
-            // 現在時刻ともともとのファイル名を組み合わせてランダムなファイル名作成
-            $thumbnail = time() . $file->getClientOriginalName();
-            // アップロードするフォルダ名取得
-            $target_path = public_path('uploads/');
-            // アップロード処理
-            $file->move($target_path, $thumbnail);
-        }else{
+        // if($file){
+        //     // 現在時刻ともともとのファイル名を組み合わせてランダムなファイル名作成
+        //     $thumbnail = time() . $file->getClientOriginalName();
+        //     // アップロードするフォルダ名取得
+        //     $target_path = public_path('uploads/');
+        //     // アップロード処理
+        //     $file->move($target_path, $thumbnail);
+        // }else{
+        //     // 画像ファイルが選択されていなければ空の文字列をセット
+        //     $thumbnail = '';
+        // }
+        
+        // S3用
+        if($file) {
+            $path = Storage::disk('s3')->putFile('/uploads', $file, 'public');
+            // パスから、最後の「ファイル名.拡張子」の部分だけ取得
+            $thumbnail = basename($path);
+        } else {
             // 画像ファイルが選択されていなければ空の文字列をセット
             $thumbnail = '';
         }
+
         
         // 入力データ値をもとに連想配列を作成
         $data = compact('name', 'kana_name', 'gender', 'thumbnail', 'age', 'birthday', 'address', 'hometown', 'feature', 'blood_type', 'job', 'hobby', 'skill', 'dayoff', 'favorite_food', 'dislike_food', 'marriage', 'children', 'lover', 'email', 'telephone', 'company_name', 'memo');
@@ -189,16 +201,29 @@ class CustomersController extends Controller
         
         // https://qiita.com/ryo-program/items/35bbe8fc3c5da1993366
         // 画像ファイルのアップロード
+        // if($file){
+        //     // 現在時刻ともともとのファイル名を組み合わせてランダムなファイル名作成
+        //     $thumbnail = time() . $file->getClientOriginalName();
+        //     // アップロードするフォルダ名取得
+        //     $target_path = public_path('uploads/');
+        //     // アップロード処理
+        //     $file->move($target_path, $thumbnail);
+        // }else{
+        //     // 画像ファイルが選択されていなければ空の文字列をセット
+        //     $thumbnail = '';
+        // }
+        
+        // 画像アップロード
         if($file){
-            // 現在時刻ともともとのファイル名を組み合わせてランダムなファイル名作成
-            $thumbnail = time() . $file->getClientOriginalName();
-            // アップロードするフォルダ名取得
-            $target_path = public_path('uploads/');
-            // アップロード処理
-            $file->move($target_path, $thumbnail);
+            // S3用
+            $path = Storage::disk('s3')->putFile('/uploads', $file, 'public');
+
+            // パスから、最後の「ファイル名.拡張子」の部分だけ取得
+            $thumbnail = basename($path);
+
         }else{
-            // 画像ファイルが選択されていなければ空の文字列をセット
-            $thumbnail = '';
+            // 画像が選択されていなければ、もとの画像名のまま
+            $thumbnail = $customer->thumbnail;
         }
         
         // 入力データ値をもとに連想配列を作成

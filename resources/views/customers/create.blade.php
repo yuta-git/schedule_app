@@ -7,11 +7,11 @@
                 <header class="header">
                     <div class="header__inner">
                         <div class="header__cog js-main-nav">
-                            <a href="/customers">＜ 顧客一覧({{ count($customers )}}人)</a>
+                            <div>新規顧客作成</div>
                         </div>
                         <div class="header__create">
                             <!--<a href="./index.html">保存</a>-->
-                            <button type="submit" class="color-white">保存</button>
+                            <button type="submit" class="btn-create">顧客情報保存</button>
                         </div>
                     </div>
                 </header>

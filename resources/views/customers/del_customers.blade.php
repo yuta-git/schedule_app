@@ -52,7 +52,7 @@
                             <a href="/customers/{{ $customer->id }}" class="customer-index__left">
                                 <figure class="customer-index__img">
                                     @if($customer->thumbnail !== '')
-                                    <img src="{{ asset('uploads/' . $customer->thumbnail )}}" alt="">
+                                    <img src="{{ Storage::disk('s3')->url('uploads/' . $customer->thumbnail) }}" alt="{{ $customer->thumbnail }}">
                                     @else
                                     <img src="{{ asset('images/no_image.jpg' )}}" alt="">
                                     @endif

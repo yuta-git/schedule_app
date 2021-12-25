@@ -8,7 +8,7 @@
                 <header class="header">
                     <div class="header__inner">
                         <div class="header__cog js-main-nav">
-                            <span>{{$customer->name}}.さんの詳細画面</span>
+                            <span>{{$customer->name}}さんの詳細画面</span>
                         </div>
                         <div class="header__create">
                             <button type="submit" class="btn-create">顧客情報更新</a>
@@ -19,14 +19,14 @@
                 <div class="c-title-lavel">
                     <div class="c-title-lavel__inner flex-box">
                         <span class="c-title-lavel__title">基本プロフィール</span>
-                        {!! link_to_route('records.create', '記録新規作成' , ['customer_id' => $customer->id ],['class' => 'before-icon-btn before-icon-btn--download']) !!}
+                        <!--{!! link_to_route('records.create', '記録新規作成' , ['customer_id' => $customer->id ],['class' => 'before-icon-btn before-icon-btn--download']) !!}-->
                     </div>
                 </div>
                 <div class="basic-profile">
                     <div class="basic-profile__inner">
                         <figure class="basic-profile__img">
                             @if($customer->thumbnail !== '')
-                                <img src="{{ asset('uploads/' . $customer->thumbnail )}}" alt="">
+                                <img src="{{ Storage::disk('s3')->url('uploads/' . $customer->thumbnail) }}" alt="{{ $customer->thumbnail }}">
                                 @else
                                 <img src="{{ asset('images/no_image.jpg' )}}" alt="">
                             @endif
