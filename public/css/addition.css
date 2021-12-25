@@ -70,3 +70,19 @@ div.fc-event-title {
 .display-none {
   display: none;
 }
+
+.thumbnail-input {
+  display: block;
+}
+
+.thumbnail-input {
+  display: none;
+}
+
+.create-profile__img {
+}
+
+.create-profile__label {
+  font-weight: bold;
+}
+

@@ -23,9 +23,11 @@
                 </div>
                 <div class="basic-profile">
                     <div class="basic-profile__inner">
-                        <figure class="basic-profile__img">
-                            <img src="assets/images/common/customer-icon.jpg" alt="">
-                        </figure>
+                        <div class="create-profile__img">
+                            <label for="your_thumbnail" class="create-profile__label">サムネイル画像<br>タップして設定</label>
+                            <input type="file" accept="image/*" name="thumbnail"  class="thumbnail-input" id="your_thumbnail" onchange="previewImage(this)">
+                            <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:150px;" alt="">
+                        </div>
                         <div class="basic-profile__body">
                             <div class="form__item">
                                 <label for="your_name" class="form__label">名前</label>
@@ -64,10 +66,6 @@
                     </div>
                 </div>
                 <!-- 基本プロフィール -->
-                <div class="form__item">
-                    <label for="your_thumbnail" class="form__label">サムネイル画像</label>
-                    <input type="file" name="thumbnail" value="" id="your_thumbnail" type="text" class="form__input" placeholder="タップして入力">
-                </div>
                 <div class="form__item">
                     <label for="your_age" class="form__label">年齢</label>
                     <input name="age" value="" id="your_age" type="text" class="form__input" placeholder="タップして入力">

@@ -24,39 +24,20 @@
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav">
                         @if(Auth::check())
-                        <li class="navbar-text text-success bg-white p-2 mr-5">{{ Auth::user()->name }}</li>
-                        
-                        <li class="nav-lists">
-                            <div class="nav-link" id="js-register">登録</div>
-                            <ul class="nav-list nav-list--register display-none" id="js-register-item">
-                              <li><a href="/customers/create" class="">顧客登録</a></li>
-                              <li><a href="/create_record_from_calendar" class="">記録登録</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="nav-lists">
-                            <div class="nav-link" id="js-customers">顧客一覧</div>
-                            <ul class="nav-list nav-list--customers display-none" id="js-customers-item">
-                                <li><a href="/customers" class="">全ての顧客</a></li>
-                                <li><a href="/favorites" class="">お気に入り</a></li>
-                                <li><a href="/del_customers" class="">削除顧客</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="nav-lists">
-                            <div class="nav-link" id="js-function">設定</div>
-                            <ul class="nav-list nav-list--function display-none" id="js-function-item">
-                                <li>{!! link_to_route('flags.create', '表示設定', [], ['class' => '']) !!}</li>
-                                <li><a href="/logout" class="">ログアウト</a></li>
-                            </ul>
-                        </li>
+                        <!--<li class="navbar-text text-success bg-white p-2 mr-5">{{ Auth::user()->name }}</li>-->
+                        <li><a href="/customers/create" class="nav-link">顧客登録</a></li>
+                        <li><a href="/customers" class="nav-link">顧客一覧</a></li>
+                        <li><a href="/favorites" class="nav-link">お気に入り</a></li>
+                        <li><a href="/del_customers" class="nav-link">削除顧客</a></li>
+                        <li>{!! link_to_route('flags.create', '表示設定', [], ['class' => 'nav-link']) !!}</li>
+                        <li><a href="/logout" class="nav-link">ログアウト</a></li>
                         @endif
                     </ul><!--/.navbar-nav -->
                 </div><!-- /.navbar-collapse -->
             </nav>
         </header>
         
-        <div class="container">
+        <div class="">
             @include('commons.flash_message')
             @include('commons.error_messages')
             @yield('content')

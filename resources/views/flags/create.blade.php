@@ -15,7 +15,7 @@
       顧客プロフィールの表示項目設定
     </div>
     <div class="header__create">
-      {!! Form::submit('登録', ['class' => 'color-white']) !!}
+      {!! Form::submit('登録', ['class' => 'btn-create']) !!}
     </div>
   </div>
 </header>
