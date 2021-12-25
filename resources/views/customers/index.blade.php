@@ -107,6 +107,8 @@
                 </div>
             </div>
             <!-- /.customer-index -->
+            
+            <!-- 隠しナビゲーション -->
             <div class="main-nav">
                 <header class="header main-nav__header">
                     <div class="header__inner">
@@ -133,13 +135,14 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div><!-- /.main-nav -->
+            
             @else
             <div class="row mt-5">
                 <h3 class="col-sm-12 text-center">該当顧客はいません</h3>
             </div>
             @endif
-            <!-- /.main-nav -->
+   
             <!-- フッターの余白 -->
             <div class="l-section__header-padding-top"></div>
 

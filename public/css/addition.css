@@ -4,6 +4,7 @@
   color: white;
 }
 
+
 .display-flex-space-between {
   display: flex;
   align-items: center;
@@ -12,4 +13,60 @@
 
 div.fc-event-title {
     white-space: normal;
+}
+
+.btn-create {
+  display: inline-block;
+  max-width: 100%;
+  padding: .3em .4em;
+  background-color: #fff;
+  border: 2px solid transparent;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+  color: skyblue;
+  font-size: 1.125rem;
+  text-align: center;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.btn-create:focus,
+.btn-create:hover {
+  background-color: #fff;
+  border-color: currentColor;
+  color: blue;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-lists {
+  position: relative;
+}
+
+.nav-list {
+  position: absolute;
+  background-color: #fff;
+  color: #17a2b8;
+  white-space: nowrap;
+  z-index: 9999;
+}
+
+.nav-list--function {
+  bottom: -44px;
+  left: -20px;
+}
+
+.nav-list--customers {
+  bottom: -66px;
+  left: -20px;
+}
+
+.nav-list--register {
+  bottom: -45px;
+  left: -20px;
+}
+
+.display-none {
+  display: none;
 }

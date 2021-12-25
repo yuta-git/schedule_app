@@ -8,7 +8,6 @@
     <header class="header">
       <div class="header__inner">
         <div class="header__cog js-main-nav">
-          <a href="./calender.html"><i class="fas fa-times"></i></a>
         </div>
         <div class="header__cog js-main-nav">
           <span class="header__month">履歴•予定情報入力</span>

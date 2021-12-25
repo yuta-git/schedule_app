@@ -83,3 +83,34 @@ document.addEventListener('DOMContentLoaded', function() {
 //     });
 // 	calendar.render();
 // });
+
+  // $(".js-main-nav").on('click', function(){
+  //   $('.main-nav').toggleClass('open');
+  //   $('body').toggleClass('noscroll');
+  // });
+
+window.addEventListener('load', function(){
+
+  const jsFunction = document.getElementById("js-function");
+  const jsFunctionItem = document.getElementById("js-function-item");
+
+  jsFunction.addEventListener('click', function(){
+  	jsFunctionItem.classList.toggle('display-none');
+  })
+  
+  const jsCustomers = document.getElementById("js-customers");
+  const jsCustomersItem = document.getElementById("js-customers-item");
+
+  jsCustomers.addEventListener('click', function(){
+  	jsCustomersItem.classList.toggle('display-none');
+  })
+
+  const jsRegister = document.getElementById("js-register");
+  const jsRegisterItem = document.getElementById("js-register-item");
+
+  jsRegister.addEventListener('click', function(){
+  	jsRegisterItem.classList.toggle('display-none');
+  })
+
+  
+})

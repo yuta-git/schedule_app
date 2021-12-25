@@ -8,10 +8,10 @@
                 <header class="header">
                     <div class="header__inner">
                         <div class="header__cog js-main-nav">
-                            <a href="/customers">＜ 顧客一覧({{ count($customers) }}人)</a>
+                            <span>{{$customer->name}}.さんの詳細画面</span>
                         </div>
                         <div class="header__create">
-                            <button type="submit" class="color-white">更新</a>
+                            <button type="submit" class="btn-create">顧客情報更新</a>
                         </div>
                     </div>
                 </header>
