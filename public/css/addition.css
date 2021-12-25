@@ -9,3 +9,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
+div.fc-event-title {
+    white-space: normal;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB; // 追加
 use App\Record;
 use App\Customer; // 追加
 use Illuminate\Http\Request;
@@ -71,7 +72,7 @@ class RecordsController extends Controller
       $customer->records()->create(['title' => $title, 'start' => $start . 'T' . $start_time, 'end' => $end . 'T' . $end_time, 'color' => $color]);
 
       // 顧客詳細へリダイレクト
-      return redirect('/customers/' . $customer->id)->with('flash_message', '記録を変更しました。');
+      return redirect('/top')->with('flash_message', '記録を変更しました。');
     }
 
     /**
@@ -142,7 +143,7 @@ class RecordsController extends Controller
         $customer = $record->customer()->get()->first();
 
         // 顧客詳細へリダイレクト
-        return redirect('/customers/' . $customer->id)->with('flash_message', '記録を変更しました。');
+        return redirect('/top')->with('flash_message', '記録を変更しました。');
     }
 
     /**
@@ -157,7 +158,37 @@ class RecordsController extends Controller
       // データベースから削除
       $record->delete();
       // 顧客詳細へリダイレクト
-      return redirect('/customers/' . $customer->id)->with('flash_message', '記録を削除しました。');
+      return redirect('/top')->with('flash_message', '記録を削除しました。');
+    }
+    
+    // 自分の記録のカレンダー情報の取得
+    public function get_calendar()
+    {
+        // ログインしているユーザーの顧客全記録を取得
+        $records = DB::select('SELECT records.id, records.customer_id, CONCAT(CONCAT(customers.name, ": "), records.title) AS title, records.start, records.end, records.color, records.created_at, records.updated_at  FROM records JOIN customers ON records.customer_id=customers.id JOIN users ON customers.user_id=users.id WHERE users.id=?', [\Auth::id()]);
+        $list = array('records' => $records);
+        // 明示的に指定しない場合は、text/html型と判断される
+        header("Content-type: application/json; charset=UTF-8");
+        //JSONデータを出力
+        echo json_encode($list);
+        exit;
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create_record_from_calendar(Request $request)
+    {
+        $date = $request->input('date');
+        // 空のインスタンスを作成
+        $record = new Record();
+        $record->start = $date;
+        $customers = \Auth::user()->customers()->get()->pluck('name', 'id');   
+        // dd($customers);
+        // view の呼び出し
+        return view('records.create_record_from_calendar', compact('record', 'customers'));
     }
     
     

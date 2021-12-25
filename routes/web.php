@@ -63,6 +63,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('search_customers', 'CustomersController@search')->name('customers.search');
     Route::get('searchFav_customers', 'CustomersController@searchFav')->name('customers.searchFav');
     Route::get('searchDel_customers', 'CustomersController@searchDel')->name('customers.searchDel');
+    
+    // カレンダー
+    Route::get('get_calendar', 'RecordsController@get_calendar');
+    Route::get('create_record_from_calendar', 'RecordsController@create_record_from_calendar');
 
 
 });
