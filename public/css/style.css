@@ -1204,5 +1204,17 @@ body.noscroll {
 }
 /*スマホ　縦からは */
 @media screen and (max-width: 480px){
+  
+    h2#fc-dom-1 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
     
+    .fc .fc-toolbar.fc-header-toolbar {
+        display: block;
+        text-align: center;
+    }
+    .fc-header-toolbar .fc-toolbar-chunk {
+        display: block;
+    }
 }

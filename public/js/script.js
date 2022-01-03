@@ -9,6 +9,7 @@ const previewImage = (obj) => {
 
 // FullCalendar
 /* global FullCalendar */
+/* global location */
 document.addEventListener('DOMContentLoaded', function() {
 	$.ajax({
 		//POST通信
@@ -27,12 +28,34 @@ document.addEventListener('DOMContentLoaded', function() {
 	      center: "title",
 	      right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
 	    },
+	    buttonText: {
+	        today: '今月',
+	        month: '月',
+	        week: '今週',
+	        day: '今日',
+	        list: 'リスト'
+    	},
+    	views: {
+		    timeGridWeek: {
+				dayHeaderFormat: function (date) {
+					const day = date.date.day;
+					const weekNum = date.date.marker.getDay();
+					const week = ['(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)'][weekNum];
+					return day + ' ' + week;
+				}
+			}
+	    },
+    	dayCellContent: function(e) {
+        	e.dayNumberText = e.dayNumberText.replace('日', '');
+    	},
+    	height: 'auto',
         navLinks: true,
         businessHours: true,
 	    locale: "ja",
 	    editable: true,
 	    events: res['records'],
 	    selectable: true,
+	    height: 'auto',
 	    eventClick: function(info) {
 		    location.href = "/records/"+ info.event.id + "/edit";
 		},
@@ -49,45 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
-// document.addEventListener('DOMContentLoaded', function() {
-// 	var calendarEl = document.getElementById('calendar');
-// 	var calendar = new FullCalendar.Calendar(calendarEl, {
-//         headerToolbar: {
-//             left: 'prev,next today',
-//             center: 'title',
-//             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-//         },
-//         initialDate: '2021-11-01',
-//         navLinks: true,
-//         businessHours: true,
-//         editable: true,
-//         locale: 'ja',
-//         events: [
-//           {
-//             title: 'カラオケ',
-//             start: '2021-11-03',
-//             color: 'green',     
-//             textColor: 'white' 
-//           },
-//           {
-//             title: 'ショッピング',
-//             start: '2021-11-13'
-//           },
-//           {
-//             title: '打ち合わせ',
-//             start: '2021-11-05T10:00:00',
-//             end: '2021-11-07T11:00:00',
-//             constraint: 'availableForMeeting'
-//           }
-//         ]
-//     });
-// 	calendar.render();
-// });
 
-  // $(".js-main-nav").on('click', function(){
-  //   $('.main-nav').toggleClass('open');
-  //   $('body').toggleClass('noscroll');
-  // });
 
 window.addEventListener('load', function(){
 
