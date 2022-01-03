@@ -40,9 +40,11 @@
                             <a href="/customers">登録順</a>
                         </span>
                     </li>
-                    <li class="sort-form__select active-sort-form">
+                    <!--<li class="sort-form__select active-sort-form">-->
+                    <li class="sort-form__select">
                         <i class="fas fa-arrows-alt-v"></i>
-                        <span class="active-sort">
+                        <!--<span class="active-sort">-->
+                        <span class="">
                             <a href="/customers/order_by_kana">
                                 50音順
                             </a>

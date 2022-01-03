@@ -42,7 +42,7 @@
                             </div>
                             <div class="form__item">
                                 <label for="your_gender" class="form__label">性別</label>
-                                <select name="gender" id="your_gender">
+                                <select name="gender" id="your_gender" class="form__gender">
                                     <option value="man" {{ $customer->gender === 'man' ? 'selected' : ''}}>男性</option>
                                     <option value="woman" {{ $customer->gender === 'woman' ? 'selected' : ''}}>女性</option>
                                     <option value="unknown" {{ $customer->gender === 'unknown' ? 'selected' : ''}}>不明</option>
@@ -68,8 +68,8 @@
                     </div>
                 </div>
                 <div class="form__item">
-                    <label for="your_thumbnail" class="form__label">サムネイル画像</label>
-                    <input type="file" name="thumbnail" value="" id="your_thumbnail" type="text" class="form__input" placeholder="タップして入力">
+                    <label for="your_thumbnail" class="form__label form__thumbnail-label">サムネイル画像</label>
+                    <input type="file" name="thumbnail" value="" id="your_thumbnail" type="text" class="form__input form__thumbnail-file">
                 </div>
                 @if($flag->age_flag === 1)
                 <div class="form__item">
@@ -105,7 +105,7 @@
                 @if($flag->blood_type_flag === 1)
                 <div class="form__item">
                     <label for="your_blood_type" class="form__label">血液型</label>
-                    <select name="blood_type" id="your_blood_type">
+                    <select name="blood_type" id="your_blood_type" class="form__blood-type">
                         <option value="A" {{ $customer->blood_type === 'A' ? 'selected' : ''}}>A型</option>
                         <option value="B" {{ $customer->blood_type === 'B' ? 'selected' : ''}}>B型</option>
                         <option value="O" {{ $customer->blood_type === 'O' ? 'selected' : ''}}>O型</option>

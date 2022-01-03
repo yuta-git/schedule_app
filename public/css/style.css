@@ -1205,6 +1205,7 @@ body.noscroll {
 /*スマホ　縦からは */
 @media screen and (max-width: 480px){
   
+  /* カレンダー  */
     h2#fc-dom-1 {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -1217,4 +1218,43 @@ body.noscroll {
     .fc-header-toolbar .fc-toolbar-chunk {
         display: block;
     }
+    
+  /* 顧客詳細 */
+    .basic-profile__inner {
+      display: block;
+    }
+    .basic-profile__img {
+      width: 70%;
+      margin: auto;
+    }
+    .basic-profile__body {
+      width: 100%;
+    }
+    .form__input {
+      text-align: initial;
+    }
+    .form__item {
+      display: block;
+    }
+    .form__gender {
+      display: block;
+      font-size: 24px;
+    }
+    .form__blood-type {
+      display: block;
+      font-size: 24px;
+    }
+    .form__thumbnail-label {
+      
+    }
+    .form__thumbnail-file {
+      font-size: 14px;
+    }
+    
+    /* 顧客新規作成*/
+    .create-profile__img {
+      text-align: center;
+      font-size: 24px;
+    }
+    
 }

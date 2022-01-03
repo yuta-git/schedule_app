@@ -39,7 +39,7 @@
                             </div>
                             <div class="form__item">
                                 <label for="your_gender" class="form__label">性別</label>
-                                <select name="gender">
+                                <select name="gender" class="form__gender">
                                     <option value="man">男性</option>
                                     <option value="woman">女性</option>
                                     <option value="unknown">不明</option>
@@ -88,7 +88,7 @@
                 </div>
                 <div class="form__item">
                     <label for="your_blood_type" class="form__label">血液型</label>
-                    <select name="blood_type" id="your_blood_type">
+                    <select name="blood_type" id="your_blood_type" class="form__blood-type">
                         <option value="A">A型</option>
                         <option value="B">B型</option>
                         <option value="O">O型</option>
