@@ -187,6 +187,12 @@ class RecordsController extends Controller
         $record->start = $date;
         $customers = \Auth::user()->customers()->get()->pluck('name', 'id');   
         // dd($customers);
+        
+        //顧客が誰もいなければ
+        if(count($customers) === 0) {
+          return redirect('/customers/create');
+        }
+        
         // view の呼び出し
         return view('records.create_record_from_calendar', compact('record', 'customers'));
     }

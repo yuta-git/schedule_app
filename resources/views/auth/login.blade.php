@@ -15,7 +15,7 @@
                                 <input type="email" name="email" class="form-normal__input" placeholder="メールアドレス">
                             </div>
                             <div class="form-normal__item">
-                                <input type="text" name="password" class="form-normal__input" placeholder="パスワード">
+                                <input type="password" name="password" class="form-normal__input" placeholder="パスワード">
                             </div>
                             <!-- ログインボタン -->
                             <div class="form-normal__item form-normal__item--submit">

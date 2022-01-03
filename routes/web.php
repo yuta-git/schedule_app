@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth']], function () {
     // ログアウト
     Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
     
+   //かな順に顧客一覧を並び替え
+    Route::get('customers/order_by_kana', 'CustomersController@order_by_kana')->name('customers.order_by_kana');
+    
     // 顧客関係
     Route::resource('customers', 'CustomersController');
     
@@ -52,6 +55,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('customers/{customer}/unfavorite', 'CustomersController@unfavorite')->name('customers.unfavorite');
     //お気に入り顧客一覧取得
     Route::get('favorites', 'CustomersController@favorites')->name('customers.favorites');
+
+
     
     // 記録関係
     Route::resource('records', 'RecordsController');

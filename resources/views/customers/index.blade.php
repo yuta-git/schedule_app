@@ -35,11 +35,18 @@
                 <ul class="sort-form__right">
                     <li class="sort-form__select">
                         <i class="fas fa-arrows-alt-v"></i>
-                        <span>登録順</span>
+                        
+                        <span>
+                            <a href="/customers">登録順</a>
+                        </span>
                     </li>
                     <li class="sort-form__select active-sort-form">
                         <i class="fas fa-arrows-alt-v"></i>
-                        <span class="active-sort">50音順</span>
+                        <span class="active-sort">
+                            <a href="/customers/order_by_kana">
+                                50音順
+                            </a>
+                        </span>
                     </li>
                 </ul>
             </div>

@@ -15,9 +15,14 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        // ログインしているユーザーの顧客一覧取得
-        // $customers = \Auth::user()->customers()->get();
-        $customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 0)->get();
+
+        //ログインしているユーザーの顧客一覧取得
+        $customers = \Auth::user()->customers()->get();
+        
+        $customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 0)->orderBy('created_at', 'ASC')->get();
+
+        
+        // dd($customers);
 
         $flag = \Auth::user()->flag()->get()->first();        
         
@@ -53,7 +58,7 @@ class CustomersController extends Controller
         //for image ref) https://qiita.com/maejima_f/items/7691aa9385970ba7e3ed
         $this->validate($request, [
             'name' => 'required',
-            'kana_name' => 'required',
+            'kana_name' => 'required|regex:/^[ぁ-んー]+$/u',  
             'gender' => 'required',
             'image' => [
                 'file',
@@ -68,6 +73,11 @@ class CustomersController extends Controller
         $file =  $request->thumbnail;
         $age = $request->input('age');
         $birthday = $request->input('birthday');
+        //誕生日が入力されているなら
+        if($birthday !== null){
+            $now = date("Ymd");
+            $age = floor(($now - str_replace("-", "", $birthday)) / 10000);
+        }
         $address = $request->input('address');
         $hometown = $request->input('hometown');
         $feature = $request->input('feature');
@@ -137,6 +147,11 @@ class CustomersController extends Controller
         
         $flag = \Auth::user()->flag()->get()->first();
         
+        //まだflagがなければ新規作成
+        if(!$flag) {
+            $flag = \Auth::user()->flag()->create([]);
+        }
+        
         // view の呼び出し
         return view('customers.show', compact('customers', 'records' , 'customer', 'flag'));
     }
@@ -165,7 +180,7 @@ class CustomersController extends Controller
         //for image ref) https://qiita.com/maejima_f/items/7691aa9385970ba7e3ed
         $this->validate($request, [
             'name' => 'required',
-            'kana_name' => 'required',
+            'kana_name' => 'required|regex:/^[ぁ-んー]+$/u',
             'gender' => 'required',
             'image' => [
                 'file',
@@ -180,6 +195,11 @@ class CustomersController extends Controller
         $file =  $request->thumbnail;
         $age = $request->input('age');
         $birthday = $request->input('birthday');
+        //誕生日が入力されているなら
+        if($birthday !== null){
+            $now = date("Ymd");
+            $age = floor(($now - str_replace("-", "", $birthday)) / 10000);
+        }
         $address = $request->input('address');
         $hometown = $request->input('hometown');
         $feature = $request->input('feature');
@@ -364,6 +384,40 @@ class CustomersController extends Controller
         }
     }
 
+    //かな名順に並び替え
+    public function order_by_kana(Request $request)
+    {
+        // ログインしているユーザーの顧客一覧取得
+        // $customers = \Auth::user()->customers()->get();
+        
+        $kind = $request->input('kind');
+        
+        // dd($kind);
+        
+        $flag = \Auth::user()->flag()->get()->first();    
+        
+        //お気に入り一覧ならば
+        if($kind === 'favorites') {
+            $fav_customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 0)->where('favorite_flag', 1)->orderBy('kana_name', 'ASC')->get();
+            // view の呼び出し
+             return view('customers.favorites', compact('fav_customers', 'flag'));
+        } else if ($kind === 'deletes') {
+            $del_customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 1)->orderBy('kana_name', 'ASC')->get();
+            // view の呼び出し
+             return view('customers.del_customers', compact('del_customers', 'flag'));
+        }
+        else {
+            $customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 0)->orderBy('kana_name', 'ASC')->get();
+            // view の呼び出し
+            return view('customers.index', compact('customers', 'flag'));
+        }
+
+
+        
+        
+        
+
+    }
 
 
 }
