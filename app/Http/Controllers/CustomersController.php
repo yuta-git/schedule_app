@@ -19,6 +19,7 @@ class CustomersController extends Controller
         //ログインしているユーザーの顧客一覧取得
         $customers = \Auth::user()->customers()->get();
         
+        //登録順の昇順で顧客一覧を取得
         $customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 0)->orderBy('created_at', 'ASC')->get();
 
         
@@ -139,6 +140,11 @@ class CustomersController extends Controller
      */
     public function show(Customer $customer)
     {
+        
+        if($customer->user_id !== \Auth::id()){
+            return redirect('/customers');
+        }
+        
         // ログインしているユーザーの顧客一覧取得
         $customers = \Auth::user()->customers()->get();
         
@@ -176,6 +182,9 @@ class CustomersController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
+        if($customer->user_id !== \Auth::id()){
+            return redirect('/customers');
+        }
         // validation        
         //for image ref) https://qiita.com/maejima_f/items/7691aa9385970ba7e3ed
         $this->validate($request, [
@@ -272,7 +281,13 @@ class CustomersController extends Controller
     
     //削除
     public function delete($customer_id){
+        
         $customer = Customer::find($customer_id);
+        
+        if($customer->user_id !== \Auth::id()){
+            return redirect('/customers');
+        }
+        
         // dd($customer);
         $customer->favorite_flag = 0;
         $customer->delete_flag = 1;
@@ -284,9 +299,14 @@ class CustomersController extends Controller
 
     //削除解除
     public function undelete($customer_id){
-        // dd($customer_id);
         
         $customer = Customer::find($customer_id);
+        
+        // dd($customer_id);
+        if($customer->user_id !== \Auth::id()){
+            return redirect('/customers');
+        }
+        
         // dd($customer);
         $customer->favorite_flag = 0;
         $customer->delete_flag = 0;
@@ -297,10 +317,9 @@ class CustomersController extends Controller
     
     //削除顧客一覧取得
     public function deletes(){
+        
         // dd('OK');
         $del_customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 1)->get();
-        
-        // dd($del_customers);
         
         $flag = \Auth::user()->flag()->get()->first();
         
@@ -310,8 +329,13 @@ class CustomersController extends Controller
     //お気に入り
     public function favorite($customer_id){
         // dd($customer_id);
-
+        
         $customer = Customer::find($customer_id);
+        
+        if($customer->user_id !== \Auth::id()){
+            return redirect('/customers');
+        }
+
         // dd($customer);
         $customer->favorite_flag = 1;
         $customer->save();
@@ -322,8 +346,13 @@ class CustomersController extends Controller
     //お気に入り解除
     public function unfavorite($customer_id){
         // dd($customer_id);
-
+        
         $customer = Customer::find($customer_id);
+        
+        if($customer->user_id !== \Auth::id()){
+            return redirect('/customers');
+        }
+
         // dd($customer);
         $customer->favorite_flag = 0;
         $customer->save();
@@ -412,9 +441,6 @@ class CustomersController extends Controller
             return view('customers.index', compact('customers', 'flag'));
         }
 
-
-        
-        
         
 
     }

@@ -31,6 +31,10 @@ class RecordsController extends Controller
         // dd($customer_id);
         
         $customer = Customer::find($customer_id);
+        
+        if($customer->user_id !== \Auth::id()){
+            return redirect('/customers');
+        }
 
         // 空のインスタンスを作成
         $record = new Record();
@@ -47,6 +51,15 @@ class RecordsController extends Controller
      */
     public function store(Request $request)
     {
+      
+      $customer_id = $request->input('customer_id');
+      
+      $customer = Customer::find($customer_id);
+      
+      if($customer->user_id !== \Auth::id()){
+            return redirect('/top');
+      }
+      
       // validation
       //for image ref) https://qiita.com/maejima_f/items/7691aa9385970ba7e3ed
       $this->validate($request, [
@@ -59,7 +72,6 @@ class RecordsController extends Controller
       ]);
 
       // 入力情報の取得
-      $customer_id = $request->input('customer_id');
       $title = $request->input('title');
       $start = $request->input('start');
       $start_time = $request->input('start_time');
@@ -68,7 +80,6 @@ class RecordsController extends Controller
       $color = $request->input('color');
 
       // 入力情報をもとにデータベースに記録保存
-      $customer = Customer::find($customer_id);
       $customer->records()->create(['title' => $title, 'start' => $start . 'T' . $start_time, 'end' => $end . 'T' . $end_time, 'color' => $color]);
 
       // 顧客詳細へリダイレクト
@@ -95,6 +106,10 @@ class RecordsController extends Controller
     public function edit(Record $record)
     {
       
+        if($record->customer()->get()->first()->user_id !== \Auth::id()){
+            return redirect('/top');
+        }
+      
       $customer = $record->customer()->get()->first(); 
       
       
@@ -111,6 +126,11 @@ class RecordsController extends Controller
      */
     public function update(Request $request, Record $record)
     {
+      
+        if($record->customer()->get()->first()->user_id !== \Auth::id()){
+            return redirect('/top');
+        }
+        
         // validation
         //for image ref) https://qiita.com/maejima_f/items/7691aa9385970ba7e3ed
         $this->validate($request, [
@@ -154,6 +174,11 @@ class RecordsController extends Controller
      */
     public function destroy(Record $record)
     {
+      
+        if($record->customer()->get()->first()->user_id !== \Auth::id()){
+            return redirect('/top');
+        }
+      
       $customer = $record->customer()->get()->first();
       // データベースから削除
       $record->delete();
