@@ -141,6 +141,7 @@ class CustomersController extends Controller
     public function show(Customer $customer)
     {
         
+        //ログインユーザー以外は一覧へリダイレクト
         if($customer->user_id !== \Auth::id()){
             return redirect('/customers');
         }
@@ -279,16 +280,19 @@ class CustomersController extends Controller
         //
     }
     
-    //削除
+    //論理削除、delete_flagを1にする
     public function delete($customer_id){
         
         $customer = Customer::find($customer_id);
         
+        //ログインユーザー以外は、一覧へリダイレクト
         if($customer->user_id !== \Auth::id()){
             return redirect('/customers');
         }
         
         // dd($customer);
+        
+        //delete_flagを1に変更して顧客を非表示にする
         $customer->favorite_flag = 0;
         $customer->delete_flag = 1;
         $customer->save();
@@ -319,8 +323,12 @@ class CustomersController extends Controller
     public function deletes(){
         
         // dd('OK');
+        
+        //detele_flagが1の顧客を取得
         $del_customers = Customer::where('user_id', \Auth::id())->where('delete_flag', 1)->get();
         
+        // ログインユーザーのflagテーブルのデータを取得
+        // getはコレクションで取得だから、firstで最初の1件を取得する必要あり
         $flag = \Auth::user()->flag()->get()->first();
         
         return view('customers.del_customers', compact('del_customers', 'flag'));
@@ -373,7 +381,11 @@ class CustomersController extends Controller
     
     // 顧客一覧検索
      public function search(Request $request){
+         
+        // formのnameがkeywordの値を取得
         $keyword = $request->input('keyword');
+        
+        // keywordをlike句で検索
         if($keyword !== ''){
             $customers = \Auth::user()->customers()->where('kana_name', 'like', "%$keyword%")->orWhere('name', 'like', "%$keyword%")->where('delete_flag', '0')->get();
             // dd($customers);

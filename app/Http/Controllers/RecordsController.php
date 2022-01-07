@@ -204,6 +204,8 @@ class RecordsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     
+    // カレンダーの日付欄をクリックした時に履歴・予定の新規作成画面を表示
     public function create_record_from_calendar(Request $request)
     {
         $date = $request->input('date');
@@ -213,7 +215,7 @@ class RecordsController extends Controller
         $customers = \Auth::user()->customers()->get()->pluck('name', 'id');   
         // dd($customers);
         
-        //顧客が誰もいなければ
+        //顧客が誰もいなければ顧客作成画面へ遷移
         if(count($customers) === 0) {
           return redirect('/customers/create');
         }
