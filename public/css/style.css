@@ -1258,3 +1258,8 @@ body.noscroll {
     }
     
 }
+
+h1 {
+  color: blue;
+  background-color: skyblue;
+}
